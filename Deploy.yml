@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icecream-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: icecream-api
+  template:
+    metadata:
+      labels:
+        app: icecream-api
+    spec:
+      containers:
+      - name: icecream-api
+        image: gerardolglz/heladoapi:dev
+        env:
+        - name: DB_HOST
+          value: sqlserver
+        - name: DB_NAME
+          value: IceCream
+        - name: DB_SA_PASSWORD
+          value: "password@12345#"
+        ports:
+        - containerPort: 80
